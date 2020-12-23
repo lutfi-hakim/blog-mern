@@ -1,9 +1,13 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { registerBg } from '../../assets';
 import { Button, Gap, Input, Link } from '../../components';
 import "./register.scss";
 
 const Register = () => {
+
+    const history = useHistory();
+
     return (
         <div className="main-pages">
             <div className="left">
@@ -19,7 +23,7 @@ const Register = () => {
                 <Gap height={40} />
                 <Button title="Register" />
                 <Gap height={150} />
-                <Link title="Back to Login" />
+                <Link title="Back to Login" onClick={() => history.push('/login')} />
             </div>
         </div>
     )
