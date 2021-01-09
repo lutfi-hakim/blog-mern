@@ -1,55 +1,53 @@
-import React, { useEffect, useState } from 'react'
-import { BlogItem, Button, Gap } from '../../components'
-import './home.scss';
-import { useHistory } from 'react-router-dom'
-import axios from 'axios';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { BlogItem, Button, Gap } from "../../components";
+import "./home.scss";
+import { setDataBlog } from "../../config/redux/action";
 
 const Home = () => {
+  const { dataBlog } = useSelector((state) => state.homeReducer);
+  const dispatch = useDispatch();
 
-    const [dataBlog, setDataBlog] = useState([]);
+  useEffect(() => {
+    dispatch(setDataBlog());
+  }, [dispatch]);
 
-    useEffect(() => {
-        axios.get('http://localhost:4000/v1/blog/posts/')
-            .then(result => {
-                console.log(result.data);
-                const responseAPI = result.data;
+  const history = useHistory();
 
-                setDataBlog(responseAPI.Data)
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }, []);
+  return (
+    <div className="home-page-wrapper">
+      <div className="create-wrapper">
+        <Button
+          title="+ New Blog"
+          onClick={() => history.push("/create-blog")}
+        />
+      </div>
 
-    const history = useHistory();
+      <Gap height={20} />
+      <div className="content-wrapper">
+        {dataBlog.map((blog) => {
+          return (
+            <BlogItem
+              key={blog._id}
+              image={`http://localhost:4000/${blog.image}`}
+              title={blog.title}
+              body={blog.body}
+              name={blog.author.name}
+              date={blog.createdAt}
+              id={blog._id}
+            />
+          );
+        })}
+      </div>
+      <div className="pagination">
+        <Button title="< Previus" />
+        <Gap width={20} />
+        <Button title="Next >" />
+      </div>
+      <Gap height={40} />
+    </div>
+  );
+};
 
-    return (
-        <div className="home-page-wrapper">
-            <div className="create-wrapper">
-                <Button title="+ New Blog" onClick={() => history.push('/create-blog')} />
-            </div>
-            <Gap height={20} />
-            <div className="content-wrapper">
-                {dataBlog.map(blog => {
-                    return <BlogItem
-                        key={blog._id}
-                        image={`http://localhost:4000/${blog.image}`}
-                        title={blog.title}
-                        body={blog.body}
-                        name={blog.author.name}
-                        date={blog.createdAt}
-                        id={blog._id}
-                    />
-                })}
-            </div>
-            <div className="pagination">
-                <Button title="< Previus" />
-                <Gap width={20} />
-                <Button title="Next >" />
-            </div>
-            <Gap height={40} />
-        </div>
-    )
-}
-
-export default Home
+export default Home;
