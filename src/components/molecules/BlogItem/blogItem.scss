@@ -22,6 +22,47 @@
         background-color: rgba(241, 217, 197, 0.185);
         height: 100%;
 
+        .title-wrapper{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .view-wrapper{
+                display: flex;
+                font-weight: 500;
+                font-size: 14px;
+                color: #837e7e;
+                .view{
+                    margin-right: 10px;
+                }
+                .rate-wrapper{
+                    img{
+                        width: 14px;
+                    }
+                }
+            }
+
+
+            .action-wrapper{
+                display: flex;
+                align-items: center;
+
+                .edit{
+                    font-weight: bold;
+                    color: rgb(125, 137, 247);
+                    cursor: pointer;
+                    margin-right: 10px;
+                }
+                .delete{
+                    font-weight: bold;
+                    color: #c03;
+                    cursor: pointer;
+                    margin: 8px;
+                    margin-right: 10px;
+                }
+            }
+        }
+
         .title {
             margin: 0px;
             font-size: 18px;

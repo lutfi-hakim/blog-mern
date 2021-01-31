@@ -1,5 +1,6 @@
 .home-page-wrapper {
     padding-top: 40px;
+    position: relative;
 
     .create-wrapper {
         width: 200px;
@@ -15,8 +16,17 @@
     }
 
     .pagination{
-        width: 200px;
+        width: 400px;
         display: flex;
         margin: auto;
+    }
+
+    .text-page{
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        justify-items: center;
+        width: 380px;
+        margin: 0px;
     }
 }
